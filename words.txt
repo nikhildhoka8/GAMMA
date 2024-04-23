@@ -1,0 +1,2 @@
+Keywords:break,continue,do,else,elseif,end,endif,for,function,if,in,return,then,until,while
+Internal commands:alias,bg,cd,eval,exec,exit,export,fc,fg,help,history,jobs,let,local,logout,read,set,shift,shopt,source,unalias

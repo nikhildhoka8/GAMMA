@@ -1,0 +1,28 @@
+#If this isn't set, the program will stop executing as soon as a line errors, or a program returns a non-zero exit code:
+set -e
+
+#NOTE: THESE COMMANDS MAY EXECUTE OUT OF ORDER - THIS IS BECAUSE OF FORKING AND PROCESS SCHEDULING
+#TEST SETUP
+touch lsTrace.txt
+
+#SET TESTS
+#print values of GAMMA environment variables
+set -z
+
+#disable wildcard globbing and allowing overwrites through redirection
+set -f
+set -C
+set -z
+
+#this will error out now that overwriting redirection is off - >> for appending still works
+ls > lsTrace.txt 
+
+#set environment variable
+set $lsFLAGS="-alF"
+#calling $lsFLAGS will replace it with "-alF"
+#see that $lsFLAG was replaced with -alF
+echo ls $lsFLAGS
+ls $lsFLAGS
+
+#TEST CLEANUP
+rm lsTrace.txt

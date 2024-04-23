@@ -1,0 +1,173 @@
+WHELPPAGENAME:cdShort
+cd usage: cd [-h] [-H] [-l [{n}]] [-{n}] [-c] [-s] (DIR)
+Use up one argument after cd, unless using [-l [{n}]], in which case use a numeric type after -l
+ENDHELPPAGE
+
+HELPPAGENAME:cd
+cd usage: cd [-h] [-H] [-l [{n}]] [-{n}] [-c] [-s] (DIR). 
+Use up to one argument after cd, unless using [-l [{n}]], in which case use a numeric type after -l.
+
+Command Line Args
+-h: Display simple help message.
+-H: Display full help message.
+-l [{n}]: Display the history list of the current directories with serial numbers. With the optional N, it displays only the last N entries
+ENSURE N COMES AFTER -l, SHOULD YOU USE IT.
+-{n}: Change the current directory to the n-th entry in the history list.
+-c: Clean the directory history.
+-s: Suppress the directory history by eliminating duplicated directories. The order of the history is maintained. The latest entry is kept.
+(DIR): The directory to change to. If (DIR) is omitted, print's the current directory. If (DIR) contains .., .. will be substitued for the parent directory.
+
+Examples
+'cd': prints the current working directory
+'cd /some_dir/': changes directory to /some_dir/ located in the current directory
+'cd ..': changes directory to the parent directory
+'cd ../some_dir/': changes directory to "some_dir" in the parent directory
+ENDHELPPAGE
+
+HELPPAGENAME:aliasShort
+alias usage: alias [-h][-H][-p] (args)
+args is any number of [name]=\"[value]\" pairs. Using name in a GAMMA command will have name replaced with value.
+ENDHELPPAGE
+
+HELPPAGENAME:alias
+alias usage: alias [-h][-H][-p] (args)
+Args can be any number of one of two formats:
+1:'[name]="[value]"' pairs. Using name in a GAMMA command will have name replaced with value.
+2:'[name]' will tell you if name is aliased.
+
+Command Line Args
+-p: list all aliases
+-h: print short help message
+-H: print full help message
+
+Examples
+'alias -p': print every alias
+'alias l': if you have aliased l, that alias will be printed. Otherwise, an error will be printed.
+'alias l="ls -CF': aliases l to "ls -CF" - you can now call l for the effects of ls -CF
+ENDHELPPAGE
+
+HELPPAGENAME:unaliasShort
+unalias usage:unalias [-a][-h][-H] (args)
+ENDHELPPAGE
+
+HELPPAGENAME:unalias
+unalias usage:unalias [-a][-h][-H] (args)
+args is any number of previously aliased commands. They will be unaliased.
+
+Command Line Args
+-a: remove all aliases
+-h: print short help message
+-H: print full help message
+
+Examples
+'unalias -a': remove all aliases
+'unalias l': if l is an alias, it will be unaliased. otherwise, nothing will happen.
+'unalias l m': unaliases l and m.
+
+ENDHELPPAGE
+HELPPAGENAME:helpShort
+help usage: help [-h][-H][-s] (args) 
+ENDHELPPAGE
+
+HELPPAGENAME:help
+help usage: help [-h][-H][-s] (args)
+Displays the help page for any internal command.
+Args can be any number of internal commands.
+
+Command Line Args
+-h: print short help message
+-H: print full help message
+-s: display the short version of help messages instead.
+
+Examples
+'help': list the valid commands help can be used with.
+'help cd': display the full help message for cd
+'help -s cd': display the short help message for cd
+'help help': display this message
+ENDHELPPAGE
+
+HELPPAGENAME:historyShort
+history usage: history [-c][-h][-H]
+alternatively, from the command line, !{n} or !!
+ENDHELPPAGE
+
+HELPPAGENAME:history
+history usage: history [-c][-h][-H]
+
+Command Line Args
+-c: clear history
+-h: print short help message
+-H: print full help message
+history can also be called in the following two ways:
+'!{n}': execute history #n
+'!!': execute the latest command
+
+Examples:
+'history': display all history
+'history -c': clear your history
+'!15': Call from command line to execute 15th most recent command
+'!!': call from command line to execute most recent command
+ENDHELPPAGE
+
+HELPPAGENAME:setShort
+set usage: set [-e][-f][-h][-H][-u][-uA] (args)
+ENDHELPPAGE
+
+HELPPAGENAME:set
+set usage: set [-e][-f][-h][-H][-u][-uA] (args)
+View or set the value of an environment variable, or manipulate certain special environment variables.
+
+Args must be in one of two forms:
+1: '$[variableName]'
+2: '$[variableName]=[variableValue]'
+
+Calling set with a form 1 arg will simply print the value of the arg. If the arg doesn't exist, an error message will be printed.
+Alternatively, if the -u commandline arg is set, this will unset the environment variable. If the arg doesn't exist, nothing will happen. 
+
+Calling set with a form 2 arg will set the variableName to variableValue. From now on, referencing the variable name with a dollar sign will replace the variable name
+with the variable value for any GAMMA function. Note: the -u environment variable will not interact with form 2 args. 
+
+Any number of args may be called. Any args that don't start with $ will be ignored.
+
+Command Line Args
+-e: If -e is set for a batch mode session, if a process returns a non 0 exit value, batch mode will stop. (Batch mode does not halt by default)
+-f: If -f is set, disable wildcard globbing. (Wildcards are default on)
+-C: disable overwrite of files from > or 2>. Default allows overrides
+-h: print short help message
+-H: print full help message
+-u: unset mode, calling any form 1 arg will unset it instead of printing the value.
+-uA: unsets all environment variables.
+
+Examples
+'set': lists every environment variable
+'set $arg1="Hello, World!"': sets $arg1 to 'Hello, World!'
+'set $arg1="Hello, World!"' $arg2=teapot': sets $arg1 to 'Hello, World!' and $arg2 to 'teapot'
+'set $arg1=1234': sets $arg1 to 1234 
+'set -u $arg1': if $arg1 is set, unset it. 
+'set -u $arg1 $arg2 $arg3 $arg4': attempt to unset $arg1, $arg2, $arg3, $arg4.
+'set -uA': unsets all environment variables. 
+'set -uA $arg1=teapot': sets $arg1 to 'teapot' AFTER clearing all environment variables
+
+ENDHELPPAGE
+
+
+HELPPAGENAME:GAMMA_ENV
+Gamma environment variables help page
+Gamma has 2 special environment variables:
+
+STOP_ON_ERROR:In piped commands, or batch mode, should a function exit with a non-zero exit code, . Default is false
+WILDCARD_GLOBBING: if true, enables the use of wildcard characters: ?, ., [...]. Default is true
+
+ENDHELPPAGE
+
+HELPPAGENAME:HELP_PAGE
+proper format for a helppage entry:
+
+helppagename:entryName
+//helpful information
+endhelppage
+
+initiating helppagename and terminating endhelppage must be CAPITAL
+additionally, you can use "helppageterminate" to stop parsing the helpPages.txt at any time.
+
+ENDHELPPAGE

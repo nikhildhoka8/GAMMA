@@ -1,0 +1,91 @@
+#If this isn't set, the program will stop executing as soon as a line errors, or a program returns a non-zero exit code:
+set -e
+
+#TESTS SETUP
+#also shows > redirection works 
+
+echo fileA > fileA.txt
+echo fileB > fileB.txt
+echo errorTest > errorTest.txt
+echo helpTest > helpTest.txt
+echo together > together.txt
+
+#REDIRECTIONS 
+#input with <
+#expected output: fileA
+grep file < fileA.txt
+
+echo -e "\n"
+
+#> redirection
+#expected output: fileC
+echo fileC > fileA.txt
+cat fileA.txt
+
+echo -e "\n"
+
+#>> appending
+#expected output: 
+#fileB
+#append
+
+echo append >> fileB.txt
+cat fileB.txt
+
+echo -e "\n"
+
+#internal commands can be redirected
+#expected output: Commands to call help on: cd, alias, unalias, history, set, help
+help > helpTest.txt
+cat helpTest.txt
+
+echo -e "\n"
+
+#std error redirection
+#expected output: cat: NONEXISTANTFILE1.txt: No such file or directory
+cat NONEXISTANTFILE1.txt 2> errorTest.txt
+cat errorTest.txt
+
+#std error appending
+#expected output:
+#cat: NONEXISTANTFILE1.txt: No such file or directory
+#cat: NONEXISTANTFILE2.txt: No such file or directory
+cat NONEXISTANTFILE2.txt 2>> errorTest.txt
+cat errorTest.txt
+
+echo -e "\n"
+
+#PIPING
+
+#simple pipe
+#expected output: fileA.txt, fileB.txt, errorTest.txt, helpTest.txt, and any other .txt files in your directory
+ls | grep .txt
+
+echo -e "\n"
+
+#internal commands can be piped
+#expected output: -h:print short help message followed by: -H print full help message
+help set | grep help 
+
+echo -e "\n"
+
+#multiple pipes
+
+#expected output: fileA.txt, fileB.txt, any text file with file and .txt in it's name
+ls | grep .txt | grep file
+
+echo -e "\n"
+
+#put it all together
+
+
+echo -e "\n"
+
+#expected output: fileA.txt, fileB.txt, any text file with file and .txt in it's name
+ls | grep .txt | grep file > together.txt
+cat together.txt
+
+echo -e "\n"
+
+#TESTS CLEANUP
+rm fileA.txt fileB.txt errorTest.txt helpTest.txt together.txt

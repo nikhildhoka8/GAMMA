@@ -1,0 +1,34 @@
+#If this isn't set, the program will stop executing as soon as a line errors, or a program returns a non-zero exit code:
+set -e
+
+#by default, wildcard globbing is enabled. if you'd like to disable it, call set -f. You can see the status of environment variables with set -z
+
+#TEST SETUP 
+#create text files with their name in it
+
+echo fileA > fileA.txt
+echo fileB > fileB.txt
+echo fileC > fileC.txt
+echo fileAB > fileAB.txt
+echo fileAC > fileAC.txt
+echo fileABC > fileABC.txt
+
+echo -e "? tests"
+#? tests
+#expected output: fileC,fileA,fileB
+cat file?.txt
+
+echo -e "\n"
+echo  "* tests"
+#* tests 
+#expected output: all of the file names (no extensions)
+cat file*.txt 
+
+#[] tests
+echo -e "\n"
+echo "\n[AC] tests"
+#expected output: fileA,fileC
+cat file[AC].txt
+
+#TEST CLEANUP
+rm fileA.txt fileB.txt fileC.txt fileAB.txt fileAC.txt fileABC.txt

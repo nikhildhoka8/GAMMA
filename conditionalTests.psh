@@ -1,0 +1,39 @@
+#If this isn't set, the program will stop executing as soon as a line errors, or a program returns a non-zero exit code: hard to test an "if - else if - then" chain if execution stops if the first "if" fails
+set -e
+
+#TEST SETUP
+#this makes a blankFile.txt - its needed for the conditional execution tests to function properly
+touch blankFile.txt
+
+
+#CONDITIONAL EXECUTION TESTS
+#Simply test if;then; block
+#expected output: "Hello" "if then block"
+if echo "Hello"; then echo "if then block";endif
+
+echo -e "\n"
+
+#simple if elseif - make sure NONEXISTANTFILE1.txt doesn't exist in your directory!
+#expected output: "Elseif block 1"
+if cat NONEXISTANTFILE1.txt; then echo "If-> then block; shouldn't see this"; elseif cat blankFile.txt; then echo "Elseif block 1";endif
+
+echo -e "\n"
+
+#if else if with multiple elseifs - the correct block has multiple thens -
+#expected output: "Correct elseif block" followed by "You ca have multiple thens in the same control block " 
+if cat NONEXISTANTFILE1.txt; then echo "If then block; shouldn't see this"; elseif cat NONEXISTANTFILE1.txt; then echo "Else if block 1, you shouldn't see this"; elseif cat blankFile.txt; then echo "Correct elseif block"; then echo "You can have multiple thens in the same control block";endif
+
+echo -e "\n"
+
+#if elseif else - 
+#expected output:"Else block" followed by "You can use then after else!"
+if cat NONEXISTANTFILE1.txt; then echo "IF then block; shouldn't see this"; elseif cat NONEXISTANTFILE1.txt; then echo "Else if block, you shouldn't see this";else echo "Else block";then echo "You can use then after else!";endif
+
+echo -e "\n"
+
+#All of it put together - expected out put is "else block!"
+if cat NONEXISTANTFILE1.txt; then echo "IF then block; shouldn't see this"; elseif cat NONEXISTANTFILE1.txt; then echo "Else if block, you shouldn't see this";elseif cat NONEXISTANTFILE1.txt; then echo "Elseif block";else echo "put together: else block!";endif
+
+
+#TEST CLEANUP
+rm blankFile.txt

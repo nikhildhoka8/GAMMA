@@ -1,0 +1,9 @@
+#!/home/ndhoka/CSCI40300/CSCI403-Projec2-Eagle5/project2
+cd ..
+cd ..
+ls
+cd /CSCI40300/CSCI403-Projec2-Eagle5/
+cd ..
+cd -l
+cd -s
+cd -l

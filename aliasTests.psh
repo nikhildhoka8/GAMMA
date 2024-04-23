@@ -1,0 +1,25 @@
+#If this isn't set, the program will stop executing as soon as a line errors, or a program returns a non-zero exit code:
+set -e
+
+#alias testing
+
+
+#expected output: nothing (no aliases yet)
+alias
+
+#set alias
+alias listFiles=ls
+
+# see alias is now set
+#expected output: Aliases: listFiles=ls
+alias
+
+#use new alias 
+#THIS IS LIKELY TO EXECUTE OUT OF ORDER, BECAUSE OF PROCESS FORKING/RACE CONDITIONS. 
+#expected output: whatever ls would do
+listFiles
+
+#unset alias
+unalias listFiles
+
+listFiles
