@@ -1,8 +1,8 @@
 a.out:
-	g++ -std=c++17 main.cpp -g -o project3 -lstdc++fs -fpermissive
+	g++ -std=c++17 main.cpp -g -o project4 -lstdc++fs -fpermissive
 
 run: a.out
-	./project3
+	./project4
 	
 clean:
-	rm project3
+	rm project4

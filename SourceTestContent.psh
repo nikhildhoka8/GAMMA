@@ -1,0 +1,2 @@
+set $testVariable1="Hello! Test variable1"
+set $testVariable2="Hello! Test variable2"

@@ -153,11 +153,11 @@ ENDHELPPAGE
 
 HELPPAGENAME:GAMMA_ENV
 Gamma environment variables help page
-Gamma has 2 special environment variables:
+Gamma has 3 special environment variables:
 
-STOP_ON_ERROR:In piped commands, or batch mode, should a function exit with a non-zero exit code, . Default is false
-WILDCARD_GLOBBING: if true, enables the use of wildcard characters: ?, ., [...]. Default is true
-
+STOP_ON_ERROR:In piped commands, or batch mode, should a function exit with a non-zero exit code, . Default is true.
+WILDCARD_GLOBBING: if true, enables the use of wildcard characters: ?, ., [...]. Default is true.
+ALLOW_OVERWRITE: if true, users can overwrite files with the use of the > redirection operator. Default is true.
 ENDHELPPAGE
 
 HELPPAGENAME:HELP_PAGE
@@ -170,4 +170,9 @@ endhelppage
 initiating helppagename and terminating endhelppage must be CAPITAL
 additionally, you can use "helppageterminate" to stop parsing the helpPages.txt at any time.
 
+ENDHELPPAGE
+
+HELPPAGEAME:Source
+source usage: source filename [args]
+Executes commands in filename located at file
 ENDHELPPAGE

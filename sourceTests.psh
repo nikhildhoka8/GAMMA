@@ -1,0 +1,15 @@
+#If this isn't set, the program will stop executing as soon as a line errors, or a program returns a non-zero exit code:
+set -e
+
+#ENSURE YOU HAVE THE FILE "SourceTestContent.psh" IN THE SAME DIRECTORY - THIS IS NEEDED TO PROPERLY TEST SOURCE!!!
+
+#call source to load in environment variables
+source SourceTestContent.psh thirdVariable fourthVariable
+
+echo $testVariable1 $testVariable2
+
+#positional arguments become environment variables with source
+
+echo $0 $1 $2 $3
+
+shift
