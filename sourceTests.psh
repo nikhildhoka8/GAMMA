@@ -12,4 +12,6 @@ echo $testVariable1 $testVariable2
 
 echo $0 $1 $2 $3
 
-shift
+shift 2
+#positional variables should be thirdVariable and fourthVariable
+echo $0 $1

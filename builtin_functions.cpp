@@ -407,7 +407,7 @@ bool builtin_set(std::vector<std::string> args,int output_fd){
                 for(int i = 1;i<args.size();i++){
                         int dollarIndex = args.at(i).find("$");
                         int equalIndex = args.at(i).find("=");
-                        if(dollarIndex==0 && equalIndex>2){
+                        if(dollarIndex==0 && equalIndex>=2){
                                 std::string arg = args.at(i);
                                 //inserts into environment variables left of equal sign as key, right of equal sign as value
                                 if(unsetMode){
@@ -440,26 +440,41 @@ bool builtin_source(std::vector<std::string> args,int output_fd){
     return true;
 }
 bool builtin_shift(std::vector<std::string> args, int output_fd){
-    std::cout<<"in shift\n";
-    int shiftcount = 0;
-    //int shiftCount = stoi(args.at(1));
+    int shiftCount;
+    try{
+        shiftCount = stoi(args.at(1));
+    } catch (...){
+        shiftCount=1;
+    }
+    if(shiftCount <0){
+        shiftCount =1;
+    }
     int paramCount = 0;
     bool findingParams = true;
-    std::cout<<"Finding positional parameters\n";
     while(findingParams){
         if(environmentVariables.find("$"+std::to_string(paramCount))!=environmentVariables.end()){
-            std::cout<<"paramCount: " + std::to_string(paramCount);
+
             paramCount++;
         } else {
             findingParams=false;
         }
-    }   
-    std::cout<<"Total postitional parameters: " <<std::to_string(paramCount)<<"\n";
-    std::cout<<"Shifting postional parameters\n";
-    for(int i=0;i<paramCount;i++){
-        std::cout <<"shifting positional parameter " << std::to_string(i+paramCount) << " to $"<<std::to_string(i)<<"\n"; 
-        environmentVariables.insert_or_assign("$"+std::to_string(i),environmentVariables.find("$"+std::to_string(i+paramCount))->second);
     }
-    std::cout<< "SHIFT NOT IMPLEMENTED YET\n";
+    if(shiftCount>paramCount){
+        shiftCount=paramCount;
+    }
+    if(shiftCount==paramCount){
+        for(int i=paramCount-shiftCount;i<paramCount;i++){
+            environmentVariables.erase(environmentVariables.find("$"+std::to_string(i)));
+        }
+    }else{
+        for(int i=0;i<paramCount-shiftCount;i++){
+            environmentVariables.insert_or_assign("$"+std::to_string(i),environmentVariables.find("$"+std::to_string(i+shiftCount))->second);
+        }
+        for(int i=paramCount-shiftCount;i<paramCount;i++){
+            environmentVariables.erase(environmentVariables.find("$"+std::to_string(i)));
+        }
+    }
+
     return true;
+    
 }

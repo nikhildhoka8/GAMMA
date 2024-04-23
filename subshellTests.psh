@@ -1,0 +1,8 @@
+set -e
+
+pwd
+(cd ..;pwd)
+pwd
+
+(alias notLS=ls;ls)
+notLS

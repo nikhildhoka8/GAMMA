@@ -172,7 +172,41 @@ additionally, you can use "helppageterminate" to stop parsing the helpPages.txt 
 
 ENDHELPPAGE
 
-HELPPAGEAME:Source
+HELPPAGEAME:sourceShort
 source usage: source filename [args]
-Executes commands in filename located at file
+Executes commands in filename located at file. 
+Args become positional variables accessable through $0, $1 $2
+source and filename become $0 and $1. Args start at $2.
+ENDHELPPAGE
+
+
+HELPPAGEAME:source
+source usage: source filename [args]
+Executes commands in filename located at file. 
+Args become positional variables accessable through $0, $1 $2
+source and filename become $0 and $1. Args start at $2.
+
+Examples:
+'source (filename)': executes commands in filename. 'source' and 'filename' become $0 and $1
+'source (filename) var1 var2': executes commands in filename. 'source' and 'filename' become $0 and $1, var1 and var2 become $3 and $4
+ENDHELPPAGE
+
+HELPPAGE:shiftShort
+usage: shift [integer]
+Shifts positonal values down ($2 becomes $1)
+Default integer is 1
+ENDHELPPAGE
+
+HELPPAGE:shift
+usage: shift [integer]
+Shifts positonal values down ($2 becomes $1)
+
+The default shift value is 1.
+If the shift value is larger than the variables provided, all #integer variables will be erased.
+shifts postional variables by the integer. 
+If there are $0, $1, $2, $3 variables, shifted by 2, 
+the new $0 will be the old $2, the new $1 will be the old $3
+
+Examples:
+'shift 2' shifts down all positional variables by 2. $3 becomes $1
 ENDHELPPAGE

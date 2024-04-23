@@ -189,10 +189,10 @@ void interactiveMode(){
 
     bool keepGoing = true;
     while(keepGoing){
-        std::cout << currentWorkingDirectory + "/ GAMMA$:";
         std::string line;
         std::string concatLine;
         if(!SUBSHELL){
+                std::cout << currentWorkingDirectory + "/ GAMMA$:";
                 std::getline(std::cin, line);
         }
         if(line=="exit"||SUBSHELL){
@@ -293,7 +293,7 @@ void batchMode(int argc, char* argv[]){
                 } else if (commandHistory.size()==0){
                         commandHistory.push_back(line);
                 }
-               bool executedNormally = prepareLine(line);
+               bool executedNormally = subshellCheck(line);
 	       if(!executedNormally && STOP_ON_ERROR){
 			break;
 		}
@@ -351,7 +351,7 @@ void builtinSourceBatchMode(std::vector<std::string> args){
                 } else if (commandHistory.size()==0){
                         commandHistory.push_back(line);
                 }
-               bool executedNormally = prepareLine(line);
+               bool executedNormally = subshellCheck(line);
 	       if(!executedNormally && STOP_ON_ERROR){
 			break;
 		}
