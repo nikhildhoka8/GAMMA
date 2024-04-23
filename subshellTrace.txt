@@ -1,0 +1,6 @@
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:(alias notLS=ls)
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:(alias notLS=ls;notLS)
+aliasTests.psh         builtin_functions.h   helpPages.txt  makefile         project4      SourceShiftTestContent.psh  subshellTests.psh  wildcardTests.psh
+builtin_functions.cpp  conditionalTests.psh  main.cpp       pipingTests.psh  setTests.psh  SourceShiftTests.psh        test.psh           words.txt
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:notLS
+Failed to execute command: notLS

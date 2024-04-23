@@ -1,0 +1,22 @@
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:source SourceShiftTests.psh
+Hello! Test variable1 Hello! Test variable2
+source SourceShiftTestContent.psh thirdVariable fourthVariable
+thirdVariable fourthVariable
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:set $0=one       
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:set $1=two
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:set $2=three
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:set $3=four
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:set
+$3=four
+$2=three
+$testVariable2=Hello! Test variable2
+$testVariable1=Hello! Test variable1
+$1=two
+$0=one
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:shift 2
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:set
+$testVariable2=Hello! Test variable2
+$testVariable1=Hello! Test variable1
+$1=four
+$0=three
+/home/computer/SchoolProjects/OperatingSystems/Project4/CSCI403-Project4-Eagle5/ GAMMA$:
